@@ -24,7 +24,9 @@ The main goal of this poject is to get in practice all the reciently acquired kn
 `In development`
 
 ### Improvements
-`to be specified`
+> ### Saturday, October 16 2021, 2:22am
+>Today I started the project and made a lot of progress.
+>I created an object containing most of the variations on the sentences, a article selector function perfectly and a not so working function that was supposed to return a  random item from a specific property list within the variables object.  
 
 ### Acknowledgements
 > This project was promoted by CodeAcademy with the goal of helping me to improve my programmign habilities. 
