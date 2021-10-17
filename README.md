@@ -1,4 +1,4 @@
-# Mixed Messages CodeAcademy ortfolio Project
+# Mixed Messages CodeAcademy Portfolio Project
  In this project, I built a random message generator program that outputs 3 new random messages every time a user runs the program. My program showcases basic JavaScript syntax and programming concepts.
 
 ## Table of Contents
