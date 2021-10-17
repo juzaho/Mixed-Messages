@@ -1,49 +1,22 @@
                     //Topic: Monster Apocalypse
 
-//events
+        //Events
 let event1;
 let event2;
 let event3;
 
-/*
-const variables = {
-
-    monster : ["zombie", "alien", "vampire", "demon", "mutant", "minecraft bee" ],
-    target : ["food", "materials", "weapons", "survivors", "clothing", "tools" ],
-    typeOfMonster : ["hideous", "bloodthirsty", "insatiable", "voracious", "shapeless", "brutish"],
-    bodyPart : ["head", "neck", "left arm", "right arm", "torso", "left leg", "right leg", "left hand", "right hand"],
-    weapon : ["baseball bat", "sharp machete", "pistol", "golf club", "crowbar", "pool cue", "sledgehammer", "snow shovel", "hand axe", "katana"],
-    illness : {
-        break() {
-            const part = ["left arm", "right arm", "right leg", "left leg"];
-            //returns a broken boddy part
-        },
-        dislocate() {
-            const part = ["left shoulder", "right shoulder", "left ankle", "right ankle"];
-            //returns a dislocated body part
-        }
-    }, 
-    building : ["house", "police station", "hospital", "school", "fierhouse", "store"],
-    entity() {
-        //returns a string of typeOfMonster + monster.
-        return `${this.random(this.typeOfMonster)} ${this.random(this.typeOfMonster)}`;
-    },
- 
-}
-*/
+let typeOfApocalypse;
 
 
+        //Objects
 
-
-
-
-        //objects
 //monster
 const monst = {
     type : ["zombie", "alien", "vampire", "demon", "mutant", "minecraft bee" /*add more...*/],
     monstAdjective : ["hideous", "bloodthirsty", "insatiable", "voracious", "shapeless", "brutish"],
     get monstGenerator(){
-        return `${this.monstAdjective[Math.floor(Math.random() * this.monstAdjective.length)]} ${this.type[Math.floor(Math.random() * this.type.length)]}`;
+        let randAdjective = Math.floor(Math.random() * this.monstAdjective.length);
+        return `${this.monstAdjective[randAdjective]} ${typeOfApocalypse}`;
     }
 }
 //objects
@@ -52,21 +25,28 @@ const objects = {
     weapon : ["baseball bat", "sharp machete", "pistol", "golf club", "crowbar", "pool cue", "sledgehammer", "snow shovel", "hand axe", "katana"],
     building : ["house", "police station", "hospital", "school", "fierhouse", "store"]
 };
-//Character status
+//character status
 const charStatus = {
-    bodyParts : ["head", "torso","neck", "left arm", "right arm", "left leg", "right leg", "left hand", "right hand"],
-    bdyPrt : [["head", "torso","neck"], ["left arm", "right arm", "left leg", "right leg"], ["left hand", "right hand", "left ankle", "right ankle"]],
+    generalBodyParts : ["head", "torso","neck", "left arm", "right arm", "left leg", "right leg", "left hand", "right hand"],
+    specificBodyParts : [["left arm", "right arm", "left leg", "right leg"], ["left shoulder", "right shoulder", "left ankle", "right ankle"], ["arm", "leg", "mouth", "ear", "face"]],
     get illness(){
-        let typeOfIllness = ["broke", "dislocated"];
-        if (typeOfIllness[Math.floor(Math.random() * typeOfIllness.length)] == "broke"){
-            return `broke your ${this.bdyPrt[1][Math.floor(Math.random() * this.bdyPrt.length)]}`;
-        } else if (typeOfIllness[Math.floor(Math.random() * typeOfIllness.length)] == "dislocated"){
-            return `dislocated you ${this.bdyPrt[2][Math.floor(Math.random() * this.bdyPrt.length)]}`
+        let typeOfIllness = ["broke", "dislocated", "cut"];
+        let randIllness = typeOfIllness[Math.floor(Math.random() * typeOfIllness.length)];
+
+        if (randIllness == "broke"){
+            return `broke your ${this.specificBodyParts[0][Math.floor(Math.random() * this.specificBodyParts[0].length)]}`;
+        } else if (randIllness == "dislocated"){
+            return `dislocated you ${this.specificBodyParts[1][Math.floor(Math.random() * this.specificBodyParts[1].length)]}`
+        } else if (randIllness == "cut") {
+            return `cut your ${this.specificBodyParts[2][Math.floor(Math.random() * this.specificBodyParts[2].length)]}`
         }
     }
 }
 
-//functions
+
+        //Functions
+
+//returns a random item from a specific object
 function randomItem(object, property, method) {
     if (property){
         return object[property][Math.floor(Math.random() * object[property].length)];
@@ -75,6 +55,7 @@ function randomItem(object, property, method) {
     }
 }
 
+//selects the correct article for the random item
 function articleSelector(word) {
     const vowels = ["a", "e", "i", "o", "u"];      
     if (vowels.includes(word.charAt(0))) {
@@ -84,14 +65,23 @@ function articleSelector(word) {
     }
 }
 
-const sentenceGenerator = () => {
+//puts the sentence together and prints the 3 events
+function sentenceGenerator() {
+    typeOfApocalypse = monst["type"][Math.floor(Math.random() * monst["type"].length)];
 
-    event1 = `You are into ${articleSelector(randomItem(monst, "type"))} apocalypse. You decide to enter a random ${randomItem(objects, "building")} looking for ${randomItem(objects, "target")}.`;
+    event1 = `You are into ${articleSelector(typeOfApocalypse)} apocalypse. You decide to enter a random ${randomItem(objects, "building")} looking for ${randomItem(objects, "target")}.`;
     console.log(event1);
-    event2 = `All the sudden ${articleSelector(randomItem(monst, null, "monstGenerator"))} is attacking you! It tries to bite your ${randomItem(charStatus, "bodyParts")}, but you defeated it just in time with your ${randomItem(objects, "weapon")}.`;
+    event2 = `All the sudden ${articleSelector(randomItem(monst, null, "monstGenerator"))} is attacking you! It tries to bite your ${randomItem(charStatus, "generalBodyParts")}, but you defeated it just in time with your ${randomItem(objects, "weapon")}.`;
     console.log(event2);
     event3 = `Running from ${articleSelector(randomItem(monst,null, "monstGenerator"))} you accidentally ${randomItem(charStatus, null, "illness")}, but somehow you managed to escape!`; 
     console.log(event3);
 }
 
-sentenceGenerator();
+
+//creates 5 aleatory apocalypse situation
+let i = 0;
+while (i < 5){
+    sentenceGenerator();
+    console.log("");
+    i++;
+}
