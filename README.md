@@ -27,6 +27,8 @@ The main goal of this poject is to get in practice all the reciently acquired kn
 > ### Saturday, October 16 2021, 2:22am
 >Today I started the project and made a lot of progress.
 >I created an object containing most of the variations on the sentences, a article selector function perfectly and a not so working function that was supposed to return a  random item from a specific property list within the variables object.  
+>### Saturday, October 16 2021, 5:32pm
+>I started looking for documentation about JavaScript objects with the goal in mind of fixing or improving my randomItem function. It turns out that my function wasnt working because of a typo error at "length" method....
 
 ### Acknowledgements
 > This project was promoted by CodeAcademy with the goal of helping me to improve my programmign habilities. 
